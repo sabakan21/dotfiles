@@ -1,0 +1,69 @@
+" setting 
+set fenc=utf-8
+"set ambiwith=double
+set number
+set cursorline
+set list
+set listchars=tab:»-,trail:-,eol:↲
+set visualbell t_vb=
+set wildmenu
+
+" indent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+set smartindent
+set autoindent
+
+" search
+set ignorecase
+set smartcase
+set hlsearch
+
+" paste
+autocmd InsertLeave * set nopaste
+
+" Autocmd
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
+"dein Scripts-----------------------------
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
+" Required:
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  let g:rc_dir = expand('~/.vim/rc')
+  let s:toml   = g:rc_dir . '/dein.toml'
+  call dein#load_toml(s:toml)
+
+  let s:lazy_toml   = g:rc_dir . '/dein_lazy.toml'
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_lazy.toml', {'lazy': 1})
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
