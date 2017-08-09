@@ -23,6 +23,7 @@ set hlsearch
 
 " paste
 autocmd InsertLeave * set nopaste
+set pastetoggle=<F12>
 
 " Autocmd
 augroup MyAutoCmd
@@ -48,9 +49,8 @@ if dein#load_state(s:dein_dir)
   let s:toml   = g:rc_dir . '/dein.toml'
   call dein#load_toml(s:toml)
 
-  let s:lazy_toml   = g:rc_dir . '/dein_lazy.toml'
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-  call dein#load_toml('~/.vim/rc/dein_lazy.toml', {'lazy': 1})
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  call dein#load_toml(s:lazy_toml)
 
   " Required:
   call dein#end()
